@@ -108,7 +108,7 @@
                     >View details</a
                   >
                   <form
-                    action="{% url 'cars:car_delete' id=car.id %}"
+                    action="{% url 'cars:car_delete' pk=car.id %}"
                     ,
                     method="post"
                   >
@@ -116,7 +116,7 @@
                     <button class="btn btn-danger">Delete</button>
                   </form>
                   <form
-                    action="{% url 'cars:update_car' id=car.id %}"
+                    action="{% url 'cars:update_car' pk=car.id %}"
                     ,method="post"
                   >
                       {% csrf_token %}

@@ -1,3 +1,6 @@
+from audioop import reverse
+from django.urls import reverse_lazy
+from dataclasses import field
 from re import template
 from django.shortcuts import redirect, render
 from .models.models import Brand,Cars
@@ -38,7 +41,12 @@ class Create_cars(CreateView):
     model=Cars
     template_name='create_car.html'
     form=Carform
+    fields='__all__'
     context_object_name='form'
+    success_url = reverse_lazy('cars:home')
+
+    # def get_success_url(self):
+    #     return super().get_success_url()
 
 class Create_brands(CreateView):
     model=Brand
@@ -67,6 +75,16 @@ class Home(ListView):
     template_name='home.html'
     context_object_name='cars'
 
+    def get_context_data(self):
+        context= super().get_context_data()
+        context={
+            'titlebrand':'Brands',
+            'brands': Brand.objects.all(),
+            'titlecar':'Cars',
+            'cars':Cars.objects.all()
+        }
+        return context
+
 # UPDATE
 
 # def update_car(request, id):
@@ -86,8 +104,11 @@ class Home(ListView):
 class Update_car(UpdateView):
     model=Cars
     form=Carform
+    fields='__all__'
     template_name='create_car.html'
     context_object_name='form'
+    success_url = reverse_lazy('cars:home')
+
 
 
 
@@ -101,4 +122,6 @@ class Update_car(UpdateView):
 
 class Delete_car(DeleteView):
     model=Cars
+    success_url = reverse_lazy('cars:home')
+
     
