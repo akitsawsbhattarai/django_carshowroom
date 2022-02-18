@@ -1,0 +1,69 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block c%}Cars {%endblock%}
+{%block title %} Cars  {%endblock%}
+{% block content%}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2 ml-5">
+        <div class="col-sm-6">
+          <h1 class="m-0">{{title}}</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{% url 'cars:home' %}">Home</a></li>
+            <li class="breadcrumb-item active">{{title}}</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+<div class='m-5'>
+    <table class="table ">
+        <thead class="thead-dark ">
+          <tr>
+            <th scope="col">S.N.</th>
+            <th scope="col">Name</th>
+            <th scope="col">Image</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Created at</th>
+            <th scope="col">Modified at</th>
+            <th scope="col">Option</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for c in cars%}
+          <tr>
+            <th scope="row">{{c.id}}</th>
+            <td class="cell100 column1">{{c.name}}</td>
+            <td class="cell100 column2">{{c.image}}</td>
+            <td class="cell100 column3">{{c.price}}</td>
+            <td class="cell100 column4">{{c.description}}</td>
+            <td class="cell100 column5">{{c.brand}}</td>
+            <td class="cell100 column6">{{c.created_at}}</td>
+            <td class="cell100 column7">{{c.modified_at}}</td>
+            <td class="cell100 column8">
+                <div  class="d-inline m-2" >
+                    <a  style="color: #1f2d3d"  class="fa fa-edit " href="{% url 'cars:update_car' pk=c.id %}"></a>
+                </div>
+                <div  class="d-inline m-2" >
+                    <a style="color: #1f2d3d " class="fa fa-trash " aria-hidden="true"  href="{% url 'cars:car_delete' pk=c.id %}"></a>
+                </div>
+            </td>
+
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+
+    {%endblock%}

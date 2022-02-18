@@ -1,0 +1,55 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block c%}Brand {%endblock%}
+{%block title %} Create Brand {%endblock%}
+{% block content%}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2 ml-5">
+        <div class="col-sm-6">
+          <h1 class="m-0">{{title}}</h1>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+
+
+<div class='m-5'>
+    <table class="table ">
+        <thead class="thead-dark ">
+          <tr>
+            <th scope="col">S.N.</th>
+            <th scope="col">Name</th>
+            <th scope="col">Logo</th>
+            <th scope="col">Created at</th>
+            <th scope="col">Option</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for b in brands%}
+          <tr>
+            <th scope="row">{{b.id}}</th>
+            <td class="cell100 column1">{{b.name}}</td>
+            <td class="cell100 column2">{{b.logo}}</td>
+            <td class="cell100 column3">{{b.created_at}}</td>
+            <td class="cell100 column2">
+                <div class="d-inline p-4" >
+                    <a  style="color: #1f2d3d " class="fa fa-edit d-inline  "href="{% url 'cars:update_brand' pk=b.id %}"></a>
+                </div>
+                <div class="d-inline p-4"  aria-hidden="true">
+                  <a  style="color: #1f2d3d " class="fa fa-trash d-inline  "href="{% url 'cars:brand_delete' pk=b.id %}"></a>
+                </div>
+            </td>
+
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+
+{%endblock%}

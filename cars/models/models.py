@@ -1,7 +1,5 @@
-from asyncio.windows_events import NULL
-from contextlib import nullcontext
 from django.db import models
-from django.db.models.base import Model
+
 
 # Create your models here.
 
@@ -10,7 +8,7 @@ class Brand(models.Model):
         db_table='brand_tbl'
         
     name=models.CharField(max_length=50, unique=True)
-    # logo=models.ImageField(upload_to='logo/',null=True)
+    logo=models.ImageField(upload_to='logo/',blank=True,null=True)
     created_at=models.DateTimeField(auto_now_add=True)
     modified_at=models.DateTimeField(auto_now=True)
 
@@ -36,3 +34,12 @@ class Cars(models.Model):
     def __str__(self):
         name=self.name
         return name
+    
+class UserRegister(models.Model):
+    
+    
+    username=models.CharField(max_length=50, unique=True)
+    password=models.CharField(max_length=50)
+
+    def __str__(self):
+        return super().username

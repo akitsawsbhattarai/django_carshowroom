@@ -46,6 +46,7 @@ CUSTOM_APPS = [
 
 THIRD_PARTY_APPS = [
     'crispy_forms',
+    'fontawesomefree',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
@@ -58,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #custom middleware
+    'middlewares.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -141,3 +144,9 @@ MEDIA_URL = '/media/'
 
 # MEDIA_ROOT is for server path to store files in the computer.
 # MEDIA_URL is the reference URL for browser to access the files over Http.
+
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    '/var/www/static/',
+]
